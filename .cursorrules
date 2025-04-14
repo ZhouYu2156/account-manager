@@ -1,0 +1,89 @@
+# 需求说明
+开发一个本地存储的账号密码管理器，功能包括：
+1. 账号密码的增删改查（CRUD）
+2. 支持账号名称/类型的模糊搜索
+3. 支持统一密码设置和单独密码设置
+4. 数据持久化到localStorage
+5. 清晰的分类展示和详情查看
+6. 支持设置盐对密码进行加密保护
+7. 支持账户信息导入/导出JSON数据
+
+# 技术栈要求
+- Vue3 Composition API
+- Element Plus组件库
+- Pinia状态管理
+- LocalStorage存储
+- CryptoJS加密库
+
+# UI设计要点
+1. 使用Element Plus组件实现现代化界面
+2. 适配白天/黑夜模式切换
+3. 密码字段显示掩码，提供显示/隐藏功能
+4. 提供复制到剪贴板功能
+5. 采用卡片式布局展示账户信息
+6. 分类折叠展示不同类型的账户
+7. 提供表单验证确保数据完整性
+8. 敏感操作提供二次确认（如删除账户、导入数据等）
+9. 操作反馈明确（成功/失败提示）
+
+# 注意事项
+1. 所有数据本地存储，确保数据安全
+2. 加密盐值由用户设置并保存
+3. 统一密码功能方便用户批量管理账户
+4. 自定义密码功能满足特殊账户的需求
+5. 必要表单验证确保数据完整
+6. 适配移动端和桌面端
+7. 考虑白天/黑夜主题切换
+8. 确保用户体验流畅
+
+# 项目结构
+```
+src/
+├── components/          # 组件目录
+│   ├── AccountForm.vue    # 账户表单组件
+│   ├── AccountList.vue    # 账户列表组件
+│   ├── AccountCard.vue    # 账户卡片组件
+│   ├── SearchBar.vue      # 搜索栏组件
+│   └── ThemeSwitch.vue    # 主题切换组件
+├── stores/             # Pinia 状态管理
+│   ├── account.ts        # 账户相关状态
+│   └── settings.ts       # 设置相关状态
+├── utils/              # 工具函数
+│   ├── crypto.ts         # 加密相关工具
+│   ├── storage.ts        # 本地存储工具
+│   └── validation.ts     # 表单验证工具
+├── types/              # 类型定义
+│   └── account.ts        # 账户相关类型
+└── assets/             # 静态资源
+    └── styles/           # 样式文件
+```
+
+# 数据结构
+```typescript
+interface Account {
+  id: string;          // 唯一标识
+  type: string;        // 账户类型
+  username: string;    // 用户名
+  password: string;    // 加密后的密码
+  description?: string;// 描述信息
+  createTime: number;  // 创建时间
+  updateTime: number;  // 更新时间
+}
+
+interface Settings {
+  salt: string;        // 加密盐值
+  theme: 'light' | 'dark'; // 主题设置
+  useUnifiedPassword: boolean; // 是否使用统一密码
+  unifiedPassword?: string;    // 统一密码（加密后）
+}
+```
+
+# 功能实现步骤
+1. 基础框架搭建
+2. 状态管理实现
+3. 加密工具开发
+4. 组件开发
+5. 主题适配
+6. 数据导入导出
+7. 移动端适配
+8. 测试与优化
