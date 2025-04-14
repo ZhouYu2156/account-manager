@@ -13,15 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: 检出代码🔍️
         uses: actions/checkout@v4
 
-      - name: Install dependencies and Build production
+      - name: 安装依赖并构建生产版本⚡️
         run: |
           npm install
           npm run build
 
-      - name: 部署
+      - name: 部署🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
