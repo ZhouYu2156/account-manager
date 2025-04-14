@@ -1,0 +1,25 @@
+name: deploy account manager
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-account-manager:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies and Build production
+        run: |
+          npm install
+          npm run build
+
+      - name: 部署
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
